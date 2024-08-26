@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Bu uygulama fotoğraf çekmek için kameranıza erişim gerektirir.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Bu uygulama fotoğraf seçmek için galerinize erişim gerektirir.</string>
 </dict>
 </plist>
