@@ -1,4 +1,5 @@
 export 'package:tuncforworkalt/controllers/bookmark_provider.dart';
+export 'package:tuncforworkalt/controllers/chat_provider.dart';
 export 'package:tuncforworkalt/controllers/image_provider.dart';
 export 'package:tuncforworkalt/controllers/jobs_provider.dart';
 export 'package:tuncforworkalt/controllers/login_provider.dart';

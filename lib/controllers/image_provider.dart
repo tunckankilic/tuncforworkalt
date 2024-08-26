@@ -1,48 +1,50 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tuncforworkalt/constants/app_constants.dart';
+import 'package:uuid/uuid.dart';
 
 class ImageUpoader extends ChangeNotifier {
+  Uuid uuid = const Uuid();
   final ImagePicker _picker = ImagePicker();
 
-  List<String> imageUrl = [];
+  String? imageUrl;
+  String? imagePath;
 
-  void pickImage() async {
-    // ignore: no_leading_underscores_for_local_identifiers
+  List<String> imageFil = [];
 
-    XFile? _imageFile = await _picker.pickImage(source: ImageSource.gallery);
+  Future<void> pickImage() async {
+    var imageFile = await _picker.pickImage(source: ImageSource.gallery);
 
-    if (_imageFile != null) {
-      // Crop the image
-
-      _imageFile = await cropImage(_imageFile);
-      if (_imageFile != null) {
-        imageUrl.add(_imageFile.path);
-      } else {
-        return;
-      }
+    imageFile = await cropImage(imageFile!);
+    if (imageFile != null) {
+      imageFil.add(imageFile.path);
+      await imageUpload(imageFile);
+      imagePath = imageFile.path;
+    } else {
+      return;
     }
   }
 
   Future<XFile?> cropImage(XFile imageFile) async {
-    // Crop the image using image_cropper package
-    CroppedFile? croppedFile = await ImageCropper.platform.cropImage(
+    final croppedFile = await ImageCropper.platform.cropImage(
       sourcePath: imageFile.path,
-      maxWidth: 1080,
-      maxHeight: 1920,
-      compressQuality: 80,
-      aspectRatio: const CropAspectRatio(ratioX: 4, ratioY: 3),
+      maxHeight: 800,
+      maxWidth: 600,
+      compressQuality: 70,
+      aspectRatio: const CropAspectRatio(ratioX: 5, ratioY: 4),
       uiSettings: [
         AndroidUiSettings(
-            toolbarTitle: 'tuncforworkalt Cropper',
-            toolbarColor: Color(AppConstants.kLightBlue.value),
-            toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.ratio4x3,
-            lockAspectRatio: true),
-        IOSUiSettings(
-          title: 'Cropper',
+          toolbarTitle: 'JobHub Cropper',
+          toolbarColor: Color(AppConstants.kLightBlue.value),
+          toolbarWidgetColor: Color(AppConstants.kLight.value),
+          initAspectRatio: CropAspectRatioPreset.ratio5x4,
+          lockAspectRatio: true,
         ),
+        IOSUiSettings(title: 'JobHub Cropper'),
       ],
     );
 
@@ -54,10 +56,17 @@ class ImageUpoader extends ChangeNotifier {
     }
   }
 
-  //  imageUpload() async {
-  //   final ref =
-  //       FirebaseStorage.instance.ref().child('tuncforworkalt').child('${uid}jpg');
-  //   await ref.putFile(imageUrl[0]);
-  //   imageUrl = await ref.getDownloadURL();
-  // }
+  Future<String?> imageUpload(XFile upload) async {
+    final image = File(upload.path);
+
+    final ref = FirebaseStorage.instance
+        .ref()
+        .child('jobhub')
+        .child('${uuid.v1()}.jpg');
+    await ref.putFile(image);
+
+    imageUrl = await ref.getDownloadURL();
+
+    return imageUrl;
+  }
 }

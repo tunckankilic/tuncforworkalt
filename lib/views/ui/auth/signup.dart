@@ -94,7 +94,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     controller: password,
                     keyboardType: TextInputType.text,
                     hintText: "Password",
-                    obscureText: signupNotifier.isObsecure,
+                    obscureText: signupNotifier.obscureText,
                     validator: (password) {
                       if (password!.isEmpty || password.length < 8) {
                         return "Please enter a valid password with at least one uppercase, one lowercase, one digit, a special character and length of 8 characters";
@@ -103,10 +103,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     },
                     suffixIcon: GestureDetector(
                       onTap: () {
-                        signupNotifier.isObsecure = !signupNotifier.isObsecure;
+                        signupNotifier.obscureText =
+                            !signupNotifier.obscureText;
                       },
                       child: Icon(
-                        signupNotifier.isObsecure
+                        signupNotifier.obscureText
                             ? Icons.visibility
                             : Icons.visibility_off,
                         color: Color(AppConstants.kDark.value),

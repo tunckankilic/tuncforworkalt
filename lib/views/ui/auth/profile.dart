@@ -134,7 +134,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: height * 0.12,
                   color: Color(AppConstants.kLightGrey.value),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         margin: EdgeInsets.only(left: 12.w),
@@ -151,13 +150,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           ReusableText(
                               text: "Resume from tuncforworkalt",
                               style: appstyle(
-                                  18,
+                                  10.sp,
                                   Color(AppConstants.kDark.value),
                                   FontWeight.w500)),
                           ReusableText(
                               text: "tuncforworkalt Resume",
                               style: appstyle(
-                                  16,
+                                  8,
                                   Color(AppConstants.kDarkGrey.value),
                                   FontWeight.w500)),
                         ],
@@ -168,7 +167,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 Positioned(
                     top: 2.h,
-                    right: 5.w,
+                    right: 12.w,
                     child: GestureDetector(
                       onTap: () {},
                       child: ReusableText(

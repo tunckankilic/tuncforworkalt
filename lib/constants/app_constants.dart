@@ -37,7 +37,7 @@ class AppConstants {
       "Masters degree in design or related field Experience working in an Agile/Scrum development process"
     ],
     "imageUrl":
-        "https://d326fntlu7tb1e.cloudfront.net/uploads/9948f698-1e4d-4cd2-84c0-a81a9911cc0a-facebook_circled_48px.png",
+        "https://store-images.s-microsoft.com/image/apps.37935.9007199266245907.b029bd80-381a-4869-854f-bac6f359c5c9.91f8693c-c75b-4050-a796-63e1314d18c9",
     "updatedAt": "2023-05-10T12:27:30.201Z",
     "agentName": "Dr Dre"
   };
@@ -54,7 +54,7 @@ class AppConstants {
     "isAgent": true,
     "skills": [false],
     "profile":
-        "https://d326fntlu7tb1e.cloudfront.net/uploads/b8bac89b-b85d-4ead-bb9e-57c96e03a08b-vinci_02.jpg",
+        "https://scontent.fadb2-1.fna.fbcdn.net/v/t1.6435-9/140319041_1151557678629753_2291501919177660954_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=2a1932&_nc_ohc=T2QJqYkkPRgQ7kNvgHsLI4S&_nc_ht=scontent.fadb2-1.fna&oh=00_AYBRElgwMN-YodYyFS0lXI-7U-xdbXMf8k03OUswJNWM3Q&oe=66F3EBFF",
     "updatedAt": "2023-09-16T15:55:23.004Z",
     "userToken":
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MDYyNTVkN2ViY2UzMGY3YTNiMTc5NyIsImlzQWRtaW4iOmZhbHNlLCJpc0FnZW50Ijp0cnVlLCJpYXQiOjE2OTk5NTI5OTAsImV4cCI6MTcwMTc2NzM5MH0.kWbkh5VJdDWDEAtTTnpoLQxkC_twIZyniMeoAcMpAz8"
@@ -79,4 +79,5 @@ class AppConstants {
     "Firebase",
     "AWS",
   ];
+  List<String> profile = [];
 }
