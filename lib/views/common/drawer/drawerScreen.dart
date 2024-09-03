@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:tuncforworkalt/constants/app_constants.dart';
 import 'package:tuncforworkalt/controllers/zoom_provider.dart';
-import 'package:tuncforworkalt/views/common/exports.dart';
+import 'package:tuncforworkalt/views/common/app_style.dart';
+import 'package:tuncforworkalt/views/common/reusable_text.dart';
 import 'package:tuncforworkalt/views/common/width_spacer.dart';
 import 'package:provider/provider.dart';
 
 class DrawerScreen extends StatefulWidget {
+  const DrawerScreen({required this.indexSetter, super.key});
   final ValueSetter indexSetter;
-  const DrawerScreen({super.key, required this.indexSetter});
 
   @override
   State<DrawerScreen> createState() => _DrawerScreenState();
@@ -31,40 +33,45 @@ class _DrawerScreenState extends State<DrawerScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 drawerItem(
-                    AntDesign.home,
-                    "Home",
-                    0,
-                    zoomNotifier.currentIndex == 0
-                        ? Color(AppConstants.kLight.value)
-                        : Color(AppConstants.kLightGrey.value)),
+                  AntDesign.home,
+                  'Home',
+                  0,
+                  zoomNotifier.currentIndex == 0
+                      ? Color(AppConstants.kLight.value)
+                      : Color(AppConstants.kLightGrey.value),
+                ),
                 drawerItem(
-                    Ionicons.chatbubble_outline,
-                    "Chat",
-                    1,
-                    zoomNotifier.currentIndex == 1
-                        ? Color(AppConstants.kLight.value)
-                        : Color(AppConstants.kLightGrey.value)),
+                  Ionicons.chatbubble_outline,
+                  'Chat',
+                  1,
+                  zoomNotifier.currentIndex == 1
+                      ? Color(AppConstants.kLight.value)
+                      : Color(AppConstants.kLightGrey.value),
+                ),
                 drawerItem(
-                    Fontisto.bookmark,
-                    "Bookmarks",
-                    2,
-                    zoomNotifier.currentIndex == 2
-                        ? Color(AppConstants.kLight.value)
-                        : Color(AppConstants.kLightGrey.value)),
+                  Fontisto.bookmark,
+                  'Bookmarks',
+                  2,
+                  zoomNotifier.currentIndex == 2
+                      ? Color(AppConstants.kLight.value)
+                      : Color(AppConstants.kLightGrey.value),
+                ),
                 drawerItem(
-                    MaterialCommunityIcons.devices,
-                    "Device Mgmt",
-                    3,
-                    zoomNotifier.currentIndex == 3
-                        ? Color(AppConstants.kLight.value)
-                        : Color(AppConstants.kLightGrey.value)),
+                  MaterialCommunityIcons.devices,
+                  'Device Mgmt',
+                  3,
+                  zoomNotifier.currentIndex == 3
+                      ? Color(AppConstants.kLight.value)
+                      : Color(AppConstants.kLightGrey.value),
+                ),
                 drawerItem(
-                    FontAwesome5Regular.user_circle,
-                    "Profile",
-                    4,
-                    zoomNotifier.currentIndex == 4
-                        ? Color(AppConstants.kLight.value)
-                        : Color(AppConstants.kLightGrey.value))
+                  FontAwesome5Regular.user_circle,
+                  'Profile',
+                  4,
+                  zoomNotifier.currentIndex == 4
+                      ? Color(AppConstants.kLight.value)
+                      : Color(AppConstants.kLightGrey.value),
+                ),
               ],
             ),
           ),
@@ -90,7 +97,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
               width: 12,
             ),
             ReusableText(
-                text: text, style: appstyle(12, color, FontWeight.bold))
+              text: text,
+              style: appstyle(12, color, FontWeight.bold),
+            ),
           ],
         ),
       ),

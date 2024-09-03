@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:tuncforworkalt/constants/app_constants.dart';
 import 'package:tuncforworkalt/controllers/exports.dart';
-import 'package:tuncforworkalt/views/common/drawer/drawer_screen.dart';
+import 'package:tuncforworkalt/views/common/drawer/drawerScreen.dart';
 import 'package:tuncforworkalt/views/common/exports.dart';
+import 'package:tuncforworkalt/views/ui/auth/login.dart';
 import 'package:tuncforworkalt/views/ui/auth/profile.dart';
 import 'package:tuncforworkalt/views/ui/bookmarks/bookmarks.dart';
+import 'package:tuncforworkalt/views/ui/chat/chat_list.dart';
 import 'package:tuncforworkalt/views/ui/device_mgt/devices_info.dart';
 import 'package:tuncforworkalt/views/ui/homepage.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,7 @@ class _MainScreenState extends State<MainScreen> {
           mainScreen: currentSreen(),
           borderRadius: 30,
           showShadow: true,
-          angle: 0.0,
+          angle: 0,
           slideWidth: 250,
           menuBackgroundColor: Color(AppConstants.kLightBlue.value),
         );
@@ -40,18 +41,36 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget currentSreen() {
-    var zoomNotifier = Provider.of<ZoomNotifier>(context);
+    final zoomNotifier = Provider.of<ZoomNotifier>(context);
+    final loginNotifier = Provider.of<LoginNotifier>(context);
+    loginNotifier.getPrefs();
     switch (zoomNotifier.currentIndex) {
       case 0:
         return const HomePage();
       case 1:
-        return const HomePage();
+        return loginNotifier.loggedIn
+            ? const ChatsList()
+            : const LoginPage(
+                drawer: false,
+              );
       case 2:
-        return const BookMarkPage();
+        return loginNotifier.loggedIn
+            ? const BookMarkPage()
+            : const LoginPage(
+                drawer: false,
+              );
       case 3:
-        return const DeviceManagement();
+        return loginNotifier.loggedIn
+            ? const DeviceManagement()
+            : const LoginPage(
+                drawer: false,
+              );
       case 4:
-        return const ProfilePage();
+        return loginNotifier.loggedIn
+            ? const ProfilePage()
+            : const LoginPage(
+                drawer: false,
+              );
       default:
         return const HomePage();
     }

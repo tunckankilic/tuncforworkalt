@@ -41,7 +41,9 @@ class SignUpNotifier extends ChangeNotifier {
     AuthHelper.signup(model).then((response) {
       if (response['success']) {
         Get.offAll(
-          () => LoginPage(),
+          () => LoginPage(
+            drawer: false,
+          ),
           transition: Transition.fade,
           duration: const Duration(seconds: 2),
         );

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:tuncforworkalt/views/common/exports.dart';
+import 'package:tuncforworkalt/views/common/app_style.dart';
+import 'package:tuncforworkalt/views/common/reusable_text.dart';
 
 class CustomOutlineBtn extends StatelessWidget {
-  const CustomOutlineBtn(
-      {super.key,
-      this.width,
-      this.hieght,
-      required this.text,
-      this.onTap,
-      required this.color,
-      this.color2});
+  const CustomOutlineBtn({
+    required this.text,
+    required this.color,
+    super.key,
+    this.width,
+    this.hieght,
+    this.onTap,
+    this.color2,
+  });
 
   final double? width;
   final double? hieght;
@@ -21,18 +23,21 @@ class CustomOutlineBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: onTap,
-        child: Container(
-          width: width,
-          height: hieght,
-          decoration: BoxDecoration(
-            color: color2,
-            border: Border.all(width: 1, color: color),
+      onTap: onTap,
+      child: Container(
+        width: width,
+        height: hieght,
+        decoration: BoxDecoration(
+          color: color2,
+          border: Border.all(color: color),
+        ),
+        child: Center(
+          child: ReusableText(
+            text: text,
+            style: appstyle(16, color, FontWeight.w600),
           ),
-          child: Center(
-            child: ReusableText(
-                text: text, style: appstyle(16, color, FontWeight.w600)),
-          ),
-        ));
+        ),
+      ),
+    );
   }
 }

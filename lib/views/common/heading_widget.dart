@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tuncforworkalt/views/common/exports.dart';
 
 class HeadingWidget extends StatelessWidget {
-  const HeadingWidget({super.key, required this.text, this.onTap});
+  const HeadingWidget({required this.text, super.key, this.onTap});
 
   final String text;
   final void Function()? onTap;
@@ -11,19 +11,19 @@ class HeadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ReusableText(
-            text: text,
-            style:
-                appstyle(20, Color(AppConstants.kDark.value), FontWeight.w600)),
+          text: text,
+          style: appstyle(20, Color(AppConstants.kDark.value), FontWeight.w600),
+        ),
         GestureDetector(
           onTap: onTap,
           child: ReusableText(
-              text: "View all",
-              style: appstyle(
-                  18, Color(AppConstants.kOrange.value), FontWeight.w500)),
-        )
+            text: 'View all',
+            style: appstyle(
+                18, Color(AppConstants.kOrange.value), FontWeight.w500),
+          ),
+        ),
       ],
     );
   }

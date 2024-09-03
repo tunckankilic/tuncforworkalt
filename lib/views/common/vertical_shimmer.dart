@@ -13,13 +13,14 @@ class VerticalShimmer extends StatelessWidget {
     return Animate(
       effects: [
         ShimmerEffect(
-            curve: Curves.easeInBack,
-            duration: const Duration(seconds: 7),
-            colors: [
-              Color(AppConstants.kLightGrey.value),
-              Color(AppConstants.kLightBlue.value),
-              Color(AppConstants.kLightGrey.value),
-            ]),
+          curve: Curves.easeInBack,
+          duration: const Duration(seconds: 7),
+          colors: [
+            Color(AppConstants.kLightGrey.value),
+            Color(AppConstants.kLightBlue.value),
+            Color(AppConstants.kLightGrey.value),
+          ],
+        ),
       ],
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),

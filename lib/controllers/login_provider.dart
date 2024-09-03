@@ -115,7 +115,9 @@ class LoginNotifier extends ChangeNotifier {
     await prefs.remove('profile');
     await prefs.remove('userId');
     await Future.delayed(const Duration(seconds: 1)).then((value) {
-      Get.offAll(() => LoginPage());
+      Get.offAll(() => LoginPage(
+            drawer: false,
+          ));
     });
   }
 

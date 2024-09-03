@@ -20,26 +20,27 @@ class PageOne extends StatelessWidget {
             const HeightSpacer(
               size: 70,
             ),
-            Image.asset("assets/images/page1.png"),
+            Image.asset('assets/images/page1.png'),
             const HeightSpacer(size: 40),
             Column(
               children: [
                 ReusableText(
-                    text: "Find Your Dream Job",
-                    style: appstyle(
-                        30, Color(AppConstants.kLight.value), FontWeight.w500)),
+                  text: 'Find Your Dream Job',
+                  style: appstyle(
+                      30, Color(AppConstants.kLight.value), FontWeight.w500),
+                ),
                 const HeightSpacer(size: 10),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.0.w),
                   child: Text(
-                    "We help you find your dream job according to your skillset, location and preference to build your career",
+                    'We help you find your dream job according to your skillset, location and preference to build your career',
                     textAlign: TextAlign.center,
                     style: appstyle(14, Color(AppConstants.kLight.value),
                         FontWeight.normal),
                   ),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

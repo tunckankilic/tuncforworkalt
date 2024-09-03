@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tuncforworkalt/views/common/exports.dart';
+import 'package:tuncforworkalt/constants/app_constants.dart';
+import 'package:tuncforworkalt/views/common/app_style.dart';
+import 'package:tuncforworkalt/views/common/reusable_text.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key, this.text, required this.child, this.actions});
+  const CustomAppBar({
+    required this.child,
+    super.key,
+    this.text,
+    this.actions,
+    this.drawer,
+  });
 
   final String? text;
   final Widget child;
   final List<Widget>? actions;
+  final bool? drawer;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +30,9 @@ class CustomAppBar extends StatelessWidget {
       actions: actions,
       centerTitle: true,
       title: ReusableText(
-          text: text ?? "",
-          style:
-              appstyle(16, Color(AppConstants.kDark.value), FontWeight.w600)),
+        text: text ?? '',
+        style: appstyle(16, Color(AppConstants.kDark.value), FontWeight.w600),
+      ),
     );
   }
 }

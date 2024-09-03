@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HeightSpacer extends StatelessWidget {
-  const HeightSpacer({super.key, required this.size});
+  const HeightSpacer({required this.size, super.key});
 
   final double size;
 

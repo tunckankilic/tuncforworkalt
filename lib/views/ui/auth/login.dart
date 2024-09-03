@@ -1,18 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tuncforworkalt/controllers/login_provider.dart';
+import 'package:tuncforworkalt/models/request/auth/login_model.dart';
 import 'package:tuncforworkalt/views/common/app_bar.dart';
 import 'package:tuncforworkalt/views/common/custom_btn.dart';
 import 'package:tuncforworkalt/views/common/custom_textfield.dart';
+import 'package:tuncforworkalt/views/common/drawer/drawer_widget.dart';
 import 'package:tuncforworkalt/views/common/exports.dart';
 import 'package:tuncforworkalt/views/common/height_spacer.dart';
 import 'package:tuncforworkalt/views/ui/auth/signup.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({required this.drawer, super.key});
+  final bool drawer;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -33,40 +35,49 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Consumer<LoginNotifier>(
       builder: (context, loginNotifier, child) {
+        loginNotifier.getPrefs();
         return Scaffold(
-            appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(50),
-              child: CustomAppBar(
-                  text: "Login",
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: const Icon(CupertinoIcons.arrow_left),
-                  )),
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(50),
+            child: CustomAppBar(
+              text: 'Login',
+              child: widget.drawer == true
+                  ? Padding(
+                      padding: EdgeInsets.all(8.0.h),
+                      child: const DrawerWidget(),
+                    )
+                  : const SizedBox.shrink(),
             ),
-            body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+          ),
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Form(
+              key: loginNotifier.loginFormKey,
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
                   const HeightSpacer(size: 50),
                   ReusableText(
-                      text: "Welcome Back!",
-                      style: appstyle(30, Color(AppConstants.kDark.value),
-                          FontWeight.w600)),
+                    text: 'Welcome Back!',
+                    style: appstyle(
+                        30, Color(AppConstants.kDark.value), FontWeight.w600),
+                  ),
                   ReusableText(
-                      text: "Fill the details to login to your account",
-                      style: appstyle(16, Color(AppConstants.kDarkGrey.value),
-                          FontWeight.w600)),
+                    text: 'Fill the details to login to your account',
+                    style: appstyle(
+                      16,
+                      Color(AppConstants.kDarkGrey.value),
+                      FontWeight.w600,
+                    ),
+                  ),
                   const HeightSpacer(size: 50),
                   CustomTextField(
                     controller: email,
                     keyboardType: TextInputType.emailAddress,
-                    hintText: "Email",
+                    hintText: 'Email',
                     validator: (email) {
-                      if (email!.isEmpty || !email.contains("@")) {
-                        return "Please enter a valid email";
+                      if (email!.isEmpty || !email.contains('@')) {
+                        return 'Please enter a valid email';
                       } else {
                         return null;
                       }
@@ -76,11 +87,11 @@ class _LoginPageState extends State<LoginPage> {
                   CustomTextField(
                     controller: password,
                     keyboardType: TextInputType.text,
-                    hintText: "Password",
+                    hintText: 'Password',
                     obscureText: loginNotifier.obscureText,
                     validator: (password) {
-                      if (password!.isEmpty || password.length < 7) {
-                        return "Please enter a valid password";
+                      if (password!.isEmpty) {
+                        return 'Please enter a valid password';
                       } else {
                         return null;
                       }
@@ -105,19 +116,42 @@ class _LoginPageState extends State<LoginPage> {
                         Get.offAll(() => const RegistrationPage());
                       },
                       child: ReusableText(
-                          text: "Register",
-                          style: appstyle(14, Color(AppConstants.kDark.value),
-                              FontWeight.w500)),
+                        text: 'Register',
+                        style: appstyle(
+                          14,
+                          Color(AppConstants.kDark.value),
+                          FontWeight.w500,
+                        ),
+                      ),
                     ),
                   ),
                   const HeightSpacer(size: 50),
                   CustomButton(
-                    onTap: () {},
-                    text: "Login",
-                  )
+                    onTap: () {
+                      if (loginNotifier.validateAndSave()) {
+                        final model = LoginModel(
+                          email: email.text,
+                          password: password.text,
+                        );
+
+                        loginNotifier.userLogin(model);
+                      } else {
+                        Get.snackbar(
+                          'Sign Failed',
+                          'Please Check your credentials',
+                          colorText: Color(AppConstants.kLight.value),
+                          backgroundColor: Colors.red,
+                          icon: const Icon(Icons.add_alert),
+                        );
+                      }
+                    },
+                    text: 'Login',
+                  ),
                 ],
               ),
-            ));
+            ),
+          ),
+        );
       },
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ReusableText extends StatelessWidget {
-  const ReusableText({super.key, required this.text, required this.style});
+  const ReusableText({required this.text, required this.style, super.key});
 
   final String text;
   final TextStyle style;
@@ -13,7 +13,7 @@ class ReusableText extends StatelessWidget {
       maxLines: 1,
       softWrap: false,
       textAlign: TextAlign.left,
-      overflow: TextOverflow.fade,
+      overflow: TextOverflow.ellipsis,
       style: style,
     );
   }

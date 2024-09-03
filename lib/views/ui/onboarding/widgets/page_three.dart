@@ -6,6 +6,8 @@ import 'package:tuncforworkalt/views/common/exports.dart';
 import 'package:tuncforworkalt/views/common/height_spacer.dart';
 import 'package:tuncforworkalt/views/ui/auth/login.dart';
 import 'package:tuncforworkalt/views/ui/auth/signup.dart';
+import 'package:tuncforworkalt/views/ui/mainscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PageThree extends StatelessWidget {
   const PageThree({super.key});
@@ -19,17 +21,21 @@ class PageThree extends StatelessWidget {
         color: Color(AppConstants.kLightBlue.value),
         child: Column(
           children: [
-            Image.asset("assets/images/page3.png"),
+            Image.asset(
+              'assets/images/page3.png',
+              height: 500,
+            ),
             const HeightSpacer(size: 20),
             ReusableText(
-                text: "Welcome To tuncforworkalt",
-                style: appstyle(
-                    30, Color(AppConstants.kLight.value), FontWeight.w600)),
+              text: 'Welcome To JobHub',
+              style: appstyle(
+                  30, Color(AppConstants.kLight.value), FontWeight.w600),
+            ),
             const HeightSpacer(size: 15),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: Text(
-                "We help you find your dream job to your skillset, location and preference to build your career",
+                'We help you find your dream job to your skillset, location and preference to build your career',
                 textAlign: TextAlign.center,
                 style: appstyle(
                     14, Color(AppConstants.kLight.value), FontWeight.normal),
@@ -41,16 +47,18 @@ class PageThree extends StatelessWidget {
               children: [
                 CustomOutlineBtn(
                   onTap: () async {
-                    //  final SharedPreferences prefs =
-                    //     await SharedPreferences.getInstance();
+                    final prefs = await SharedPreferences.getInstance();
 
-                    // await prefs.setBool('entrypoint', true);
+                    await prefs.setBool('entrypoint', true);
 
-                    Get.to(() => const LoginPage());
+                    await Get.to(
+                      () => const LoginPage(
+                        drawer: true,
+                      ),
+                    );
                   },
-                  text: "Login",
+                  text: 'Login',
                   width: width * 0.4,
-                  hieght: height * 0.06,
                   color: Color(AppConstants.kLight.value),
                 ),
                 GestureDetector(
@@ -63,21 +71,33 @@ class PageThree extends StatelessWidget {
                     color: Color(AppConstants.kLight.value),
                     child: Center(
                       child: ReusableText(
-                          text: "Sign Up",
-                          style: appstyle(
-                              16,
-                              Color(AppConstants.kLightBlue.value),
-                              FontWeight.w600)),
+                        text: 'Sign Up',
+                        style: appstyle(
+                          16,
+                          Color(AppConstants.kLightBlue.value),
+                          FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
             const HeightSpacer(size: 30),
-            ReusableText(
-                text: "Continue as guest",
+            GestureDetector(
+              onTap: () async {
+                final prefs = await SharedPreferences.getInstance();
+
+                await prefs.setBool('entrypoint', true);
+
+                await Get.to(() => const MainScreen());
+              },
+              child: ReusableText(
+                text: 'Continue as guest',
                 style: appstyle(
-                    16, Color(AppConstants.kLight.value), FontWeight.w400))
+                    16, Color(AppConstants.kLight.value), FontWeight.w400),
+              ),
+            ),
           ],
         ),
       ),

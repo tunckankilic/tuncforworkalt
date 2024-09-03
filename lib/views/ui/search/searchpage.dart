@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:tuncforworkalt/models/response/jobs/jobs_response.dart';
+import 'package:tuncforworkalt/services/helpers/jobs_helper.dart';
 import 'package:tuncforworkalt/views/common/exports.dart';
 import 'package:tuncforworkalt/views/common/loader.dart';
+import 'package:tuncforworkalt/views/ui/jobs/widgets/job_tile.dart';
 import 'package:tuncforworkalt/views/ui/search/widgets/custom_field.dart';
 
 class SearchPage extends StatefulWidget {
@@ -16,26 +20,52 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(AppConstants.kOrange.value),
-          iconTheme: IconThemeData(color: Color(AppConstants.kLight.value)),
-          title: CustomField(
-            hintText: "Search for a job",
-            controller: search,
-            onEditingComplete: () {
+      appBar: AppBar(
+        backgroundColor: Color(AppConstants.kOrange.value),
+        iconTheme: IconThemeData(color: Color(AppConstants.kLight.value)),
+        title: CustomField(
+          hintText: 'Search for a job',
+          controller: search,
+          onEditingComplete: () {
+            setState(() {});
+          },
+          suffixIcon: GestureDetector(
+            onTap: () {
               setState(() {});
             },
-            suffixIcon: GestureDetector(
-              onTap: () {
-                setState(() {});
-              },
-              child: const Icon(AntDesign.search1),
-            ),
+            child: const Icon(AntDesign.search1),
           ),
-          elevation: 0,
         ),
-        body: const SearchLoading(
-          text: "Start Searching For Jobs",
-        ));
+        elevation: 0,
+      ),
+      body: search.text.isNotEmpty
+          ? Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.0.w, vertical: 12.h),
+              child: FutureBuilder<List<JobsResponse>>(
+                future: JobsHelper.searchJobs(search.text),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Text('Error ${snapshot.error}');
+                  } else if (snapshot.data!.isEmpty) {
+                    return const SearchLoading(text: 'Job not found');
+                  } else {
+                    final jobs = snapshot.data;
+                    return ListView.builder(
+                      itemCount: jobs!.length,
+                      itemBuilder: (context, index) {
+                        final job = jobs[index];
+                        return VerticalTileWidget(job: job);
+                      },
+                    );
+                  }
+                },
+              ),
+            )
+          : const SearchLoading(
+              text: 'Start Searching For Jobs',
+            ),
+    );
   }
 }

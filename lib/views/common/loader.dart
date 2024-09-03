@@ -4,8 +4,8 @@ import 'package:tuncforworkalt/views/common/exports.dart';
 
 class SearchLoading extends StatelessWidget {
   const SearchLoading({
-    super.key,
     required this.text,
+    super.key,
   });
 
   final String text;
@@ -13,16 +13,18 @@ class SearchLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(20.h),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset("assets/images/optimized_search.png"),
-            ReusableText(
-                text: text,
-                style: appstyle(
-                    24, Color(AppConstants.kDark.value), FontWeight.bold))
-          ],
-        ));
+      padding: EdgeInsets.all(20.h),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset('assets/images/optimized_search.png'),
+          ReusableText(
+            text: text,
+            style:
+                appstyle(24, Color(AppConstants.kDark.value), FontWeight.bold),
+          ),
+        ],
+      ),
+    );
   }
 }

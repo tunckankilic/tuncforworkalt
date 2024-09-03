@@ -4,13 +4,14 @@ import 'package:tuncforworkalt/views/common/exports.dart';
 import 'package:tuncforworkalt/views/common/height_spacer.dart';
 
 class DevicesInfo extends StatelessWidget {
-  const DevicesInfo(
-      {super.key,
-      required this.location,
-      required this.device,
-      required this.platform,
-      required this.date,
-      required this.ipAdress});
+  const DevicesInfo({
+    required this.location,
+    required this.device,
+    required this.platform,
+    required this.date,
+    required this.ipAdress,
+    super.key,
+  });
 
   final String location;
   final String device;
@@ -24,13 +25,13 @@ class DevicesInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ReusableText(
-            text: platform,
-            style:
-                appstyle(22, Color(AppConstants.kDark.value), FontWeight.bold)),
+          text: platform,
+          style: appstyle(22, Color(AppConstants.kDark.value), FontWeight.bold),
+        ),
         ReusableText(
-            text: device,
-            style:
-                appstyle(22, Color(AppConstants.kDark.value), FontWeight.bold)),
+          text: device,
+          style: appstyle(22, Color(AppConstants.kDark.value), FontWeight.bold),
+        ),
         const HeightSpacer(size: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,23 +40,25 @@ class DevicesInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ReusableText(
-                    text: date,
-                    style: appstyle(16, Color(AppConstants.kDarkGrey.value),
-                        FontWeight.w400)),
+                  text: date,
+                  style: appstyle(
+                      16, Color(AppConstants.kDarkGrey.value), FontWeight.w400),
+                ),
                 ReusableText(
-                    text: ipAdress,
-                    style: appstyle(16, Color(AppConstants.kDarkGrey.value),
-                        FontWeight.w400)),
+                  text: ipAdress,
+                  style: appstyle(
+                      16, Color(AppConstants.kDarkGrey.value), FontWeight.w400),
+                ),
               ],
             ),
             CustomOutlineBtn(
-              text: "Sign Out",
+              text: 'Sign Out',
               color: Color(AppConstants.kOrange.value),
               hieght: height * 0.05,
               width: width * 0.3,
-            )
+            ),
           ],
-        )
+        ),
       ],
     );
   }

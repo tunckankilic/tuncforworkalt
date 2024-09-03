@@ -19,9 +19,8 @@ class SearchWidget extends StatelessWidget {
           Row(
             children: [
               SizedBox(
-                width: width * 0.83,
+                width: width * 0.84,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Icon(
                       Feather.search,
@@ -30,9 +29,10 @@ class SearchWidget extends StatelessWidget {
                     ),
                     const WidthSpacer(width: 20),
                     ReusableText(
-                        text: "Search for jobs",
-                        style: appstyle(18, Color(AppConstants.kOrange.value),
-                            FontWeight.w500))
+                      text: 'Search for jobs',
+                      style: appstyle(18, Color(AppConstants.kOrange.value),
+                          FontWeight.w500),
+                    ),
                   ],
                 ),
               ),
@@ -40,7 +40,7 @@ class SearchWidget extends StatelessWidget {
                 FontAwesome.sliders,
                 color: Color(AppConstants.kDarkGrey.value),
                 size: 20.h,
-              )
+              ),
             ],
           ),
           const HeightSpacer(size: 7),
@@ -48,7 +48,7 @@ class SearchWidget extends StatelessWidget {
             color: Color(AppConstants.kDarkGrey.value),
             thickness: 0.5,
             endIndent: 40.w,
-          )
+          ),
         ],
       ),
     );

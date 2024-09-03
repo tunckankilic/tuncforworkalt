@@ -26,21 +26,22 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Consumer<OnBoardNotifier>(
-      builder: (context, onBoardNotifier, child) {
-        return Stack(
-          children: [
-            PageView(
-              physics: onBoardNotifier.isLastPage
-                  ? const NeverScrollableScrollPhysics()
-                  : const AlwaysScrollableScrollPhysics(),
-              controller: pageController,
-              onPageChanged: (page) {
-                onBoardNotifier.isLastPage = page == 2;
-              },
-              children: const [PageOne(), PageTwo(), PageThree()],
-            ),
-            Positioned(
+    return Scaffold(
+      body: Consumer<OnBoardNotifier>(
+        builder: (context, onBoardNotifier, child) {
+          return Stack(
+            children: [
+              PageView(
+                physics: onBoardNotifier.isLastPage
+                    ? const NeverScrollableScrollPhysics()
+                    : const AlwaysScrollableScrollPhysics(),
+                controller: pageController,
+                onPageChanged: (page) {
+                  onBoardNotifier.isLastPage = page == 2;
+                },
+                children: const [PageOne(), PageTwo(), PageThree()],
+              ),
+              Positioned(
                 bottom: height * 0.12,
                 left: 0,
                 right: 0,
@@ -51,22 +52,26 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           controller: pageController,
                           count: 3,
                           effect: WormEffect(
-                              dotHeight: 12,
-                              dotWidth: 12,
-                              spacing: 10,
-                              dotColor: Color(AppConstants.kDarkGrey.value)
-                                  .withOpacity(0.5),
-                              activeDotColor: Color(AppConstants.kLight.value)),
+                            dotHeight: 12,
+                            dotWidth: 12,
+                            spacing: 10,
+                            dotColor: Color(AppConstants.kDarkGrey.value)
+                                .withOpacity(0.5),
+                            activeDotColor: Color(AppConstants.kLight.value),
+                          ),
                         ),
-                      )),
-            Positioned(
+                      ),
+              ),
+              Positioned(
                 child: onBoardNotifier.isLastPage
                     ? const SizedBox.shrink()
                     : Align(
                         alignment: Alignment.bottomCenter,
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 20.w, vertical: 30.h),
+                            horizontal: 20.w,
+                            vertical: 30.h,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -75,33 +80,39 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                   pageController.jumpToPage(2);
                                 },
                                 child: ReusableText(
-                                    text: "Skip",
-                                    style: appstyle(
-                                        16,
-                                        Color(AppConstants.kLight.value),
-                                        FontWeight.w500)),
+                                  text: 'Skip',
+                                  style: appstyle(
+                                    16,
+                                    Color(AppConstants.kLight.value),
+                                    FontWeight.w500,
+                                  ),
+                                ),
                               ),
                               GestureDetector(
                                 onTap: () {
                                   pageController.nextPage(
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      curve: Curves.ease);
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.ease,
+                                  );
                                 },
                                 child: ReusableText(
-                                    text: "Next",
-                                    style: appstyle(
-                                        16,
-                                        Color(AppConstants.kLight.value),
-                                        FontWeight.w500)),
-                              )
+                                  text: 'Next',
+                                  style: appstyle(
+                                    16,
+                                    Color(AppConstants.kLight.value),
+                                    FontWeight.w500,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                      ))
-          ],
-        );
-      },
-    ));
+                      ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
   }
 }

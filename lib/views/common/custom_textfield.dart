@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:tuncforworkalt/views/common/exports.dart';
+import 'package:tuncforworkalt/constants/app_constants.dart';
+import 'package:tuncforworkalt/views/common/app_style.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField(
-      {super.key,
-      required this.controller,
-      required this.hintText,
-      required this.keyboardType,
-      this.validator,
-      this.suffixIcon,
-      this.obscureText});
+  const CustomTextField({
+    required this.controller,
+    required this.hintText,
+    required this.keyboardType,
+    super.key,
+    this.validator,
+    this.suffixIcon,
+    this.obscureText,
+  });
 
   final TextEditingController controller;
   final String hintText;
@@ -26,27 +28,33 @@ class CustomTextField extends StatelessWidget {
         keyboardType: keyboardType,
         obscureText: obscureText ?? false,
         decoration: InputDecoration(
-            hintText: hintText,
-            suffixIcon: suffixIcon,
-            hintStyle: appstyle(
-                14, Color(AppConstants.kDarkGrey.value), FontWeight.w500),
-            errorBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.zero,
-                borderSide: BorderSide(color: Colors.red, width: 0.5)),
-            focusedBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.zero,
-                borderSide: BorderSide(color: Colors.transparent, width: 0)),
-            focusedErrorBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.zero,
-                borderSide: BorderSide(color: Colors.red, width: 0.5)),
-            disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.zero,
-                borderSide: BorderSide(
-                    color: Color(AppConstants.kDarkGrey.value), width: 0.5)),
-            enabledBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.zero,
-                borderSide: BorderSide(color: Colors.transparent, width: 0.5)),
-            border: InputBorder.none),
+          hintText: hintText,
+          suffixIcon: suffixIcon,
+          hintStyle: appstyle(
+              14, Color(AppConstants.kDarkGrey.value), FontWeight.w500),
+          errorBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.zero,
+            borderSide: BorderSide(color: Colors.red, width: 0.5),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.zero,
+            borderSide: BorderSide(color: Colors.transparent, width: 0),
+          ),
+          focusedErrorBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.zero,
+            borderSide: BorderSide(color: Colors.red, width: 0.5),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.zero,
+            borderSide: BorderSide(
+                color: Color(AppConstants.kDarkGrey.value), width: 0.5),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.zero,
+            borderSide: BorderSide(color: Colors.transparent, width: 0.5),
+          ),
+          border: InputBorder.none,
+        ),
         controller: controller,
         cursorHeight: 25,
         style: appstyle(14, Color(AppConstants.kDark.value), FontWeight.w500),
