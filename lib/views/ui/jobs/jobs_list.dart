@@ -33,7 +33,7 @@ class JobListPage extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Text('Error ${snapshot.error}');
+            return const SearchLoading(text: 'No Jobs to display');
           } else if (snapshot.data!.isEmpty) {
             return const SearchLoading(text: 'No Jobs to display');
           } else {

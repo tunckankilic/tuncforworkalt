@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tuncforworkalt/constants/app_constants.dart';
-import 'package:tuncforworkalt/main.dart';
 import 'package:tuncforworkalt/models/request/auth/login_model.dart';
 import 'package:tuncforworkalt/models/request/auth/profile_update_model.dart';
 import 'package:tuncforworkalt/services/helpers/auth_helper.dart';
@@ -10,6 +9,12 @@ import 'package:tuncforworkalt/views/ui/mainscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginNotifier extends ChangeNotifier {
+  final loginFormKey = GlobalKey<FormState>();
+  final profileFormKey = GlobalKey<FormState>();
+
+  bool? _entrypoint;
+  bool _firstTime = true;
+  bool? _loggedIn;
   bool _obscureText = true;
 
   bool get obscureText => _obscureText;
@@ -19,8 +24,6 @@ class LoginNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool _firstTime = true;
-
   bool get firstTime => _firstTime;
 
   set firstTime(bool newState) {
@@ -28,16 +31,12 @@ class LoginNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool? _entrypoint;
-
   bool get entrypoint => _entrypoint ?? false;
 
   set entrypoint(bool newState) {
     _entrypoint = newState;
     notifyListeners();
   }
-
-  bool? _loggedIn;
 
   bool get loggedIn => _loggedIn ?? false;
 
@@ -57,9 +56,6 @@ class LoginNotifier extends ChangeNotifier {
       loggedIn = false;
     }
   }
-
-  final loginFormKey = GlobalKey<FormState>();
-  final profileFormKey = GlobalKey<FormState>();
 
   bool validateAndSave() {
     final form = loginFormKey.currentState;

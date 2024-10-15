@@ -66,7 +66,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                 children: [
                   ReusableText(
                     text: 'Personal Details',
-                    style: appstyle(35, Color(AppConstants. kDark.value), FontWeight.bold),
+                    style: appstyle(18.sp, Color(AppConstants.kDark.value),
+                        FontWeight.bold),
                   ),
                   Consumer<ImageUpoader>(
                     builder: (context, imageUploader, child) {
@@ -76,7 +77,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                 imageUploader.pickImage();
                               },
                               child: CircleAvatar(
-                                backgroundColor: Color(AppConstants.kLightBlue.value),
+                                backgroundColor:
+                                    Color(AppConstants.kLightBlue.value),
                                 // backgroundImage: ,
                                 child: const Center(
                                   child: Icon(Icons.photo_filter_rounded),
@@ -89,7 +91,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                 setState(() {});
                               },
                               child: CircleAvatar(
-                                backgroundColor: Color(AppConstants.kLightBlue.value),
+                                backgroundColor:
+                                    Color(AppConstants.kLightBlue.value),
                                 backgroundImage:
                                     FileImage(File(imageUploader.imageFil[0])),
                               ),
@@ -131,7 +134,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                     const HeightSpacer(size: 10),
                     ReusableText(
                       text: 'Professional Skills',
-                      style: appstyle(30, Color(AppConstants.kDark.value), FontWeight.bold),
+                      style: appstyle(
+                          30, Color(AppConstants.kDark.value), FontWeight.bold),
                     ),
                     const HeightSpacer(size: 10),
                     CustomTextField(
@@ -209,7 +213,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                 'Image Missing',
                                 'Please upload an image to proceed',
                                 colorText: Color(AppConstants.kLight.value),
-                                backgroundColor: Color(AppConstants.kLightBlue.value),
+                                backgroundColor:
+                                    Color(AppConstants.kLightBlue.value),
                                 icon: const Icon(Icons.add_alert),
                               );
                             } else {

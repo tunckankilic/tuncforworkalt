@@ -26,7 +26,7 @@ class MessaginTextField extends StatelessWidget {
       cursorColor: Color(AppConstants.kDarkGrey.value),
       controller: messageController,
       keyboardType: TextInputType.multiline,
-      style: appstyle(16, Color(AppConstants.kDark.value), FontWeight.w500),
+      style: appstyle(16.sp, Color(AppConstants.kDark.value), FontWeight.w500),
       decoration: InputDecoration(
         isDense: true,
         contentPadding: EdgeInsets.all(6.h),
@@ -35,7 +35,7 @@ class MessaginTextField extends StatelessWidget {
         suffixIcon: sufixIcon,
         hintText: 'Type your message here',
         hintStyle: appstyle(
-            14, Color(AppConstants.kDarkGrey.value), FontWeight.normal),
+            14.sp, Color(AppConstants.kDarkGrey.value), FontWeight.normal),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(12.h),

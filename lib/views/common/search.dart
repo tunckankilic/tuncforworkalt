@@ -19,7 +19,7 @@ class SearchWidget extends StatelessWidget {
           Row(
             children: [
               SizedBox(
-                width: width * 0.84,
+                width: width * 0.65,
                 child: Row(
                   children: [
                     Icon(
@@ -30,7 +30,7 @@ class SearchWidget extends StatelessWidget {
                     const WidthSpacer(width: 20),
                     ReusableText(
                       text: 'Search for jobs',
-                      style: appstyle(18, Color(AppConstants.kOrange.value),
+                      style: appstyle(18.sp, Color(AppConstants.kOrange.value),
                           FontWeight.w500),
                     ),
                   ],

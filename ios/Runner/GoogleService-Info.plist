@@ -2,24 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>431101350822-amj0nedqq105g8s5cj9kc1j528q5l2if.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.431101350822-amj0nedqq105g8s5cj9kc1j528q5l2if</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>431101350822-6k3sjok29bo98n1mur7ot27n4v11gafu.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDSzGwsr6TSWPT6nkU5_Cek6N2n5ZfT17M</string>
+	<string>AIzaSyCODfAJsfMVYk7hxfY-l1GCE7oLLW3c8aM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>431101350822</string>
+	<string>82311728945</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>site.tunckankilic.tuncforworkalt</string>
 	<key>PROJECT_ID</key>
-	<string>ecomprofire</string>
+	<string>jobhub-7290c</string>
 	<key>STORAGE_BUCKET</key>
-	<string>ecomprofire.appspot.com</string>
+	<string>jobhub-7290c.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:431101350822:ios:c58abf0758133384783567</string>
+	<string>1:82311728945:ios:6a93bf93887bf1f743aa10</string>
 </dict>
 </plist>

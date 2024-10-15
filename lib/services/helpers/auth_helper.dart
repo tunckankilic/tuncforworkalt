@@ -59,34 +59,81 @@ class AuthHelper {
 
       if (userCredential.user != null) {
         await _firestore.collection('users').doc(userCredential.user!.uid).set({
+          '_id': userCredential.user!.uid,
           'username': model.username,
           'email': model.email,
-          // Şifreyi Firestore'a kaydetmiyoruz, güvenlik açısından doğru değil
+          'isAdmin': false,
+          'isAgent': false,
+          'skills': [],
+          'updatedAt': FieldValue.serverTimestamp(),
+          'location': '',
+          'phone': '',
+          'profile': '',
         });
         return {'success': true, 'message': 'Signup successful'};
       }
       return {'success': false, 'message': 'Signup failed'};
+    } on FirebaseAuthException catch (e) {
+      String message;
+      switch (e.code) {
+        case 'weak-password':
+          message = 'The password provided is too weak.';
+          break;
+        case 'email-already-in-use':
+          message = 'An account already exists for that email.';
+          break;
+        default:
+          message = 'An error occurred. Please try again.';
+      }
+      return {'success': false, 'message': message};
     } catch (e) {
       print('Signup error: $e');
-      return {'success': false, 'message': e.toString()};
+      return {
+        'success': false,
+        'message': 'An unexpected error occurred. Please try again.'
+      };
     }
   }
 
   static Future<ProfileRes?> getProfile() async {
     try {
-      User? user = _auth.currentUser;
+      User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
-        DocumentSnapshot doc =
-            await _firestore.collection('users').doc(user.uid).get();
+        DocumentSnapshot doc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .get();
 
         if (doc.exists) {
-          return ProfileRes.fromJson(doc.data() as Map<String, dynamic>);
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+          return ProfileRes(
+            id: data['_id'] ?? '',
+            username: data['username'] ?? '',
+            email: data['email'] ?? '',
+            isAdmin: data['isAdmin'] ?? false,
+            isAgent: data['isAgent'] ?? false,
+            skills: List<String>.from(data['skills'] ?? []),
+            updatedAt: _parseTimestamp(data['updatedAt']),
+            location: data['location'] ?? '',
+            phone: data['phone'] ?? '',
+            profile: data['profile'] ?? '',
+          );
         }
       }
       return null;
     } catch (e) {
       print('Get profile error: $e');
-      throw Exception("Failed to get the profile");
+      throw Exception("Failed to get the profile: $e");
     }
+  }
+
+  static DateTime _parseTimestamp(dynamic timestamp) {
+    if (timestamp is Timestamp) {
+      return timestamp.toDate();
+    } else if (timestamp is String) {
+      return DateTime.parse(timestamp);
+    }
+    return DateTime.now();
   }
 }

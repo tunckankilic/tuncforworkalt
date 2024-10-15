@@ -37,25 +37,41 @@ class SignUpNotifier extends ChangeNotifier {
     }
   }
 
-  void upSignup(SignupModel model) {
-    AuthHelper.signup(model).then((response) {
+  void upSignup(SignupModel model) async {
+    try {
+      Map<String, dynamic> response = await AuthHelper.signup(model);
+
       if (response['success']) {
         Get.offAll(
-          () => LoginPage(
-            drawer: false,
-          ),
+          () => LoginPage(drawer: false),
           transition: Transition.fade,
           duration: const Duration(seconds: 2),
         );
+        Get.snackbar(
+          'Success',
+          'Signup successful. Please login.',
+          colorText: Color(AppConstants.kLight.value),
+          backgroundColor: Colors.green,
+          icon: const Icon(Icons.check_circle),
+        );
       } else {
         Get.snackbar(
-          'Sign up Failed',
+          'Signup Failed',
           response['message'],
           colorText: Color(AppConstants.kLight.value),
           backgroundColor: Colors.red,
-          icon: const Icon(Icons.add_alert),
+          icon: const Icon(Icons.error),
         );
       }
-    });
+    } catch (e) {
+      print('Error in upSignup: $e');
+      Get.snackbar(
+        'Error',
+        'An unexpected error occurred. Please try again.',
+        colorText: Color(AppConstants.kLight.value),
+        backgroundColor: Colors.red,
+        icon: const Icon(Icons.error),
+      );
+    }
   }
 }

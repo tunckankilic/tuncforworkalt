@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:tuncforworkalt/controllers/exports.dart';
 import 'package:tuncforworkalt/models/request/auth/signup_model.dart';
 import 'package:tuncforworkalt/views/common/app_bar.dart';
@@ -10,7 +11,6 @@ import 'package:tuncforworkalt/views/common/custom_textfield.dart';
 import 'package:tuncforworkalt/views/common/exports.dart';
 import 'package:tuncforworkalt/views/common/height_spacer.dart';
 import 'package:tuncforworkalt/views/ui/auth/login.dart';
-import 'package:provider/provider.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
@@ -34,7 +34,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final loginNotifier = Provider.of<LoginNotifier>(context);
     return Consumer<SignUpNotifier>(
       builder: (context, signupNotifier, child) {
         return Scaffold(
@@ -88,7 +87,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   keyboardType: TextInputType.emailAddress,
                   hintText: 'Email',
                   validator: (email) {
-                    if (email!.isEmpty && email.contains('@')) {
+                    if (email!.isEmpty || !email.contains('@')) {
                       return 'Please enter a valid email';
                     } else {
                       return null;
@@ -103,7 +102,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   obscureText: signupNotifier.obscureText,
                   validator: (password) {
                     if (password!.isEmpty || password.length < 8) {
-                      return 'Please enter a valid password with at least one uppercase, one lowercase, one digit, a special character and length of 8 characters';
+                      return 'Please enter a valid password with at least 8 characters';
                     }
                     return null;
                   },
@@ -149,13 +148,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 const HeightSpacer(size: 50),
                 CustomButton(
                   onTap: () {
-                    final model = SignupModel(
-                      username: name.text,
-                      email: email.text,
-                      password: password.text,
-                    );
-
-                    signupNotifier.upSignup(model);
+                    if (_validateInputs()) {
+                      final model = SignupModel(
+                        username: name.text,
+                        email: email.text,
+                        password: password.text,
+                      );
+                      signupNotifier.upSignup(model);
+                    }
                   },
                   text: 'Sign Up',
                 ),
@@ -165,5 +165,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
         );
       },
     );
+  }
+
+  bool _validateInputs() {
+    if (name.text.isEmpty || email.text.isEmpty || password.text.isEmpty) {
+      Get.snackbar('Error', 'Please fill in all fields');
+      return false;
+    }
+    if (!email.text.contains('@')) {
+      Get.snackbar('Error', 'Please enter a valid email address');
+      return false;
+    }
+    if (password.text.length < 8) {
+      Get.snackbar('Error', 'Password should be at least 8 characters long');
+      return false;
+    }
+    return true;
   }
 }

@@ -34,8 +34,8 @@ class _HomePageState extends State<HomePage> {
           actions: [
             Padding(
               padding: EdgeInsets.all(12.h),
-              child: const CircleAvatar(
-                radius: 15,
+              child: CircleAvatar(
+                radius: 15.r,
                 backgroundImage: AssetImage('assets/images/user.png'),
               ),
             ),
@@ -60,16 +60,16 @@ class _HomePageState extends State<HomePage> {
                     const HeightSpacer(size: 10),
                     Text(
                       'Search \nFind & Apply',
-                      style: appstyle(
-                          40, Color(AppConstants.kDark.value), FontWeight.bold),
+                      style: appstyle(40.sp, Color(AppConstants.kDark.value),
+                          FontWeight.bold),
                     ),
-                    const HeightSpacer(size: 40),
+                    HeightSpacer(size: 40.h),
                     SearchWidget(
                       onTap: () {
                         Get.to(() => const SearchPage());
                       },
                     ),
-                    const HeightSpacer(size: 30),
+                    HeightSpacer(size: 30.h),
                     HeadingWidget(
                       text: 'Popular Jobs',
                       onTap: () {
@@ -112,12 +112,12 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
-                    const HeightSpacer(size: 20),
+                    HeightSpacer(size: 20.h),
                     HeadingWidget(
                       text: 'Recently Posted',
                       onTap: () {},
                     ),
-                    const HeightSpacer(size: 20),
+                    HeightSpacer(size: 20.h),
                     FutureBuilder(
                       future: jobNotifier.recent,
                       builder: (context, snapshot) {

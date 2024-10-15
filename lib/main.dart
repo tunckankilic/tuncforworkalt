@@ -1,7 +1,9 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tuncforworkalt/controllers/exports.dart';
+import 'package:tuncforworkalt/firebase_options.dart';
 import 'package:tuncforworkalt/views/ui/mainscreen.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +11,9 @@ import 'views/common/exports.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (context) => OnBoardNotifier()),
     ChangeNotifierProvider(create: (context) => LoginNotifier()),
@@ -37,7 +41,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'TuncForWorkAlt',
+            title: 'JobHub',
             theme: ThemeData(
               scaffoldBackgroundColor: Color(AppConstants.kLight.value),
               iconTheme: IconThemeData(color: Color(AppConstants.kDark.value)),

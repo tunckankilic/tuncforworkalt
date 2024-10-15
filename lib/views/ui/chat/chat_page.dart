@@ -13,7 +13,6 @@ import 'package:tuncforworkalt/views/common/loader.dart';
 import 'package:tuncforworkalt/views/ui/chat/widgets/textfield.dart';
 import 'package:tuncforworkalt/views/ui/mainscreen.dart';
 import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({

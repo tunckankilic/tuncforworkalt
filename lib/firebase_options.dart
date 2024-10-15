@@ -50,21 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDxbrLz6AZzq6SRse3ZKFD4hMxejQ1FOYM',
-    appId: '1:431101350822:android:173836e44899fc2d783567',
-    messagingSenderId: '431101350822',
-    projectId: 'ecomprofire',
-    storageBucket: 'ecomprofire.appspot.com',
+    apiKey: 'AIzaSyB_Xx2jN2YtyhAajqIQzgF-AfTn1ZDYvw4',
+    appId: '1:82311728945:android:54d6354170c7d18e43aa10',
+    messagingSenderId: '82311728945',
+    projectId: 'jobhub-7290c',
+    storageBucket: 'jobhub-7290c.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDSzGwsr6TSWPT6nkU5_Cek6N2n5ZfT17M',
-    appId: '1:431101350822:ios:c58abf0758133384783567',
-    messagingSenderId: '431101350822',
-    projectId: 'ecomprofire',
-    storageBucket: 'ecomprofire.appspot.com',
-    androidClientId: '431101350822-6k3sjok29bo98n1mur7ot27n4v11gafu.apps.googleusercontent.com',
-    iosClientId: '431101350822-amj0nedqq105g8s5cj9kc1j528q5l2if.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCODfAJsfMVYk7hxfY-l1GCE7oLLW3c8aM',
+    appId: '1:82311728945:ios:6a93bf93887bf1f743aa10',
+    messagingSenderId: '82311728945',
+    projectId: 'jobhub-7290c',
+    storageBucket: 'jobhub-7290c.appspot.com',
     iosBundleId: 'site.tunckankilic.tuncforworkalt',
   );
 }

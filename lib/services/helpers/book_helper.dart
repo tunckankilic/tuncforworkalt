@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tuncforworkalt/models/bookmark_res.dart';
 import 'package:tuncforworkalt/models/request/bookmarks/bookmarks_model.dart';
 import 'package:tuncforworkalt/models/response/bookmarks/all_bookmarks.dart';
 
@@ -22,7 +23,7 @@ class BookMarkHelper {
 
       return [true, docRef.id];
     } catch (e) {
-      print('Error adding bookmark: $e');
+      log('Error adding bookmark: $e');
       return [false];
     }
   }
@@ -42,7 +43,7 @@ class BookMarkHelper {
 
       return true;
     } catch (e) {
-      print('Error deleting bookmark: $e');
+      log('Error deleting bookmark: $e');
       return false;
     }
   }
@@ -66,7 +67,7 @@ class BookMarkHelper {
 
       return bookmarks;
     } catch (e) {
-      print('Error getting bookmarks: $e');
+      log('Error getting bookmarks: $e');
       throw Exception('Failed to load bookmarks');
     }
   }
